@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}
+<title>Contacto - Caos News</title>
+{% endblock titulo %}
+{% block link_activos %}
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'index'%}">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'nos' %}">Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'contac' %}">Contactanos</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Noticias
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <h6 class="dropdown-header">Por Categoria</h6>
+                                </li>
+                                <li><a class="dropdown-item" href="Cat_nacional.html">Nacional</a></li>
+                                <li><a class="dropdown-item" href="Cat_Internacional.html">Internacional</a></li>
+                                <li><a class="dropdown-item" href="Cat_Deporte.html">Deporte</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="Cat_Autor.html">Por Autor</a></li>
+                            </ul>
+                        </li>
+{% endblock link_activos %}
+
+
+{% block contenido %}
+        <!--Formulario Contacto-->
+        <section class="container-fluid bg-contacto">
+            <div class="container-fluid animate__animated animate__fadeInLeft">
+                <div class="form-contact">
+                    <h2>Contactanos</h2>
+                    <form method="POST" onsubmit="return va_formulario()">                    
+                        {% csrf_token %}
+                        <div class="form-row mb-2">
+                            <div class="form-group col-md-6">
+                                <label class="font-weight-bold">Nombre <span id="nombre_span"
+                                        class="text-danger">*</span></label>
+                                <input id="txtnombre" type="text" class="form-control" placeholder="Tu nombre"
+                                   oninput="validar_nombre()" minlength="3" maxlength="15" pattern="[A-Za-z]+" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="font-weight-bold">Apellido <span id="apellido_span"
+                                        class="text-danger">*</span></label>
+                                <input id="txtapellido" type="text" class="form-control" placeholder="Tu apellido"
+                                    oninput="validar_apellido()"minlength="3"  maxlength="15" pattern="[A-Za-z]+" required>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold">Correo electrónico <span id="mail_span"
+                                    class="text-danger">*</span></label>
+                            <input id="txtmail" type="email" class="form-control"
+                                placeholder="Ejemplo@ejemplo.cl" oninput="validar_email()" required >
+                        </div>
+                        <div class="form-group mb-5">
+                            <label class="font-weight-bold">Comentarios<span id="com_span"
+                                    class="text-danger">*</span></label>
+                            <textarea id="txtcoment" name="contacto" class="form-control"
+                                placeholder="Dejanos tus Comentarios"></textarea>
+                        </div>
+                        <div class="text-end">
+                            <button class="btn btn-outline width-100 col-btn-sm mb-1" type="reset" id="boton">Limpiar</button>
+                            <button class="btn btn-outline width-100 col-btn-sm mb-1" type="submit" id="boton">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+{% endblock contenido %}
